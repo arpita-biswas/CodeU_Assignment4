@@ -53,7 +53,7 @@ public class CountingIslands {
 		int counter = 0;
 		for(int i=0; i<n_row; i++){
 			for(int j=0; j<n_column; j++){
-				if(countHelper(n_row, n_column, grid, new GridPoint(i,j), visited)){
+				if(isNewIsland(n_row, n_column, grid, new GridPoint(i,j), visited)){
 					counter++;					
 				}
 			}
@@ -72,7 +72,7 @@ public class CountingIslands {
 	 * @param visited
 	 * @return
 	 */
-	private static boolean countHelper(int n_row, int n_column, boolean [][] grid, GridPoint currentPoint, HashSet<Integer> visited){
+	private static boolean isNewIsland(int n_row, int n_column, boolean [][] grid, GridPoint currentPoint, HashSet<Integer> visited){
 		
 		//if the current point is represents water or is already visited, then return false
 		if(grid[currentPoint.r][currentPoint.c] == false || visited.contains((currentPoint.r*n_column+currentPoint.c))){
@@ -84,41 +84,13 @@ public class CountingIslands {
 		//      go to the neighboring points to flag the connecting land points as visited, and
 		//      return true to indicate the group of points is an island.
 		visited.add(( currentPoint.r*n_column + currentPoint.c )); //store the row-major index of the current point
-		Set<GridPoint> moves = move(currentPoint, n_row, n_column);
+		Set<GridPoint> moves = currentPoint.move(n_row, n_column);
 		for(GridPoint gp: moves){
-			countHelper(n_row, n_column, grid, gp, visited);
+			isNewIsland(n_row, n_column, grid, gp, visited);
 		}		
 		return true;
 	}
-	
-	/**
-	 * move() takes as input "currentPoint" (r,c), dimensions of the grid ("n_row" and "n_column")
-	 * and returns a set of valid next grid points to continue search.
-	 * 
-	 * @param currentPoint
-	 * @param n_row
-	 * @param n_column
-	 * @return
-	 */
-	private static Set<GridPoint> move(GridPoint currentPoint, int n_row, int n_column){
-		int r = currentPoint.r;
-		int c = currentPoint.c;
-		Set<GridPoint> valid_directions = new HashSet<GridPoint>();
-		if(r != 0 ){//up
-			valid_directions.add(new GridPoint(r-1, c));
-		}
-		if(c != n_column-1){//right
-			valid_directions.add(new GridPoint(r, c+1));
-		}
-		if(r != n_row-1){//down
-			valid_directions.add(new GridPoint(r+1, c));
-		}
-		if(c != 0){//left
-			valid_directions.add(new GridPoint(r, c-1));
-		}
-		return valid_directions;		
-	}
-	
+		
 	public static void main (String args[]){
 		testNullGrid();
 		testEmptyGrid();
@@ -266,6 +238,7 @@ public class CountingIslands {
 				 {false, false, true, false},
 				 {false, false, true, false}
 				};
-	    assertEquals(3, CountingIslands.count(n_row, n_column, grid));
+		
+		assertEquals(3, CountingIslands.count(n_row, n_column, grid));
 	}
 }
