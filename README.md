@@ -7,7 +7,7 @@ function count()
 2. If the grid dimension does not match with the given number of rows and number of columns then return -1 to flag an error.    
 3. Else, for each cell in the grid check if the cell denotes water or has been already visited.  
     i) If YES, go to the next cell.  
-    ii) If NO, increase the island-count by 1 and (call function countHelper() to) perform a depth first search to explore all the (true) cells that can be reached by eventually traversing horizontally or vertically. All such cells are marked visited.  
+    ii) If NO, increase the island-count by 1 and (call function isNewIsland() to) perform a depth first search to explore all the (true) cells that can be reached by eventually traversing horizontally or vertically. All such cells are marked visited.  
 4. Return island-count.  
 
 Time complexity: O(mxn) where m and n are the number of rows and columns of the grid respectively.
