@@ -1,4 +1,3 @@
-package CodeU_Assignment4;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -48,6 +47,17 @@ public class GridPoint {
 			valid_directions.add(new GridPoint(r, c-1));
 		}
 		return valid_directions;		
+	}
+	
+	/** getIndex() takes as input the total number of columns the grid, and 
+	 * returns the row-major index of the this grid point
+	 * 
+	 * @param n_column: total number of columns of the grid
+	 * @return
+	 */
+	
+	public int getIndex(int n_column){
+	    return this.r*n_column + this.c;
 	}
 	
 	@Override

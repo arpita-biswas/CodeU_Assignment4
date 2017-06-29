@@ -1,4 +1,4 @@
-package CodeU_Assignment4;
+
 /**
  * Assignment 4: 
  * Given a 2-dimensional (boolean) map of tiles. 
@@ -84,7 +84,7 @@ public class CountingIslands {
 		//then, add this point to the visited list and
 		//      go to the neighboring points to flag the connecting land points as visited, and
 		//      return true to indicate the group of points is an island.
-		visited.add(( currentPoint.r*n_column + currentPoint.c )); //store the row-major index of the current point
+		visited.add(currentPoint.getIndex(n_column)); //store the row-major index of the current point
 		Set<GridPoint> moves = currentPoint.move(n_row, n_column);
 		for(GridPoint gp: moves){
 			isNewIsland(n_row, n_column, grid, gp, visited);
