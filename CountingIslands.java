@@ -1,3 +1,4 @@
+package CodeU_Assignment4;
 /**
  * Assignment 4: 
  * Given a 2-dimensional (boolean) map of tiles. 
