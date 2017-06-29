@@ -62,7 +62,7 @@ public class CountingIslands {
 		return counter;			
 	}
 	
-	/** countHelper() takes as input dimensions of the grid "n_row" and "n_column", 
+	/** isNewIsland() takes as input dimensions of the grid "n_row" and "n_column", 
 	 *  the "grid", a current grid point "currentPoint" and a list of grid points already visited.
 	 *  It returns true when a new island is found, and returns false otherwise.
 	 * 
@@ -107,55 +107,54 @@ public class CountingIslands {
 	
 	@Test
 	public static void testNullGrid() {
-		boolean [][] grid = null;
-		int n_row = 0;
-		int n_column = 0;
+	    boolean [][] grid = null;
+	    int n_row = 0;
+	    int n_column = 0;
 	    assertEquals(0, CountingIslands.count(n_row, n_column, grid));	    
 	}
 	
 	@Test
 	public static void testEmptyGrid() {
-		boolean [][] grid = {};
-		int n_row = 0;
-		int n_column = 0;
+	    boolean [][] grid = {};
+	    int n_row = 0;
+	    int n_column = 0;
 	    assertEquals(0, CountingIslands.count(n_row, n_column, grid));	    
 	}
 	
 	@Test
 	public static void testInvalidRowColumnDimension() {
-		boolean [][] grid = {{true, false, true}, {false, false, true}};
-		int n_row = -1;
-		int n_column = 2;
-	    assertEquals(-1, CountingIslands.count(n_row, n_column, grid));	    
-	    
-	    n_row = 4;
-		n_column = 2;
-	    assertEquals(-1, CountingIslands.count(n_row, n_column, grid));	 
-	    
-	    n_row = 1;
-		n_column = 2;
+	    boolean [][] grid = {{true, false, true}, {false, false, true}};
+	    int n_row = -1;
+	    int n_column = 2;
 	    assertEquals(-1, CountingIslands.count(n_row, n_column, grid));
-	    
-	    n_row = 3;
-		n_column = -1;
-	    assertEquals(-1, CountingIslands.count(n_row, n_column, grid));	  
-	    
-	    n_row = 3;
-		n_column = 4;
+	    n_row = 4;
+	    n_column = 2;
 	    assertEquals(-1, CountingIslands.count(n_row, n_column, grid));	 
-	    
+
+	    n_row = 1;
+	    n_column = 2;
+	    assertEquals(-1, CountingIslands.count(n_row, n_column, grid));
+
 	    n_row = 3;
-		n_column = 1;
+	    n_column = -1;
+	    assertEquals(-1, CountingIslands.count(n_row, n_column, grid));	  
+
+	    n_row = 3;
+	    n_column = 4;
+	    assertEquals(-1, CountingIslands.count(n_row, n_column, grid));	 
+
+	    n_row = 3;
+	    n_column = 1;
 	    assertEquals(-1, CountingIslands.count(n_row, n_column, grid));
 	}
 	
 	@Test
 	public static void testOneCellGrid() {
 		
-		int n_row = 1;
-		int n_column = 1;
+	    int n_row = 1;
+	    int n_column = 1;
 		
-		boolean [][] grid = {{true}};
+	    boolean [][] grid = {{true}};
 	    assertEquals(1, CountingIslands.count(n_row, n_column, grid));
 	    
 	    boolean [][] grid2 = {{false}};
@@ -164,82 +163,81 @@ public class CountingIslands {
 	
 	@Test
 	public static void testNoIsland() {		
-		int n_row = 5;
-		int n_column = 5;
+	    int n_row = 5;
+	    int n_column = 5;
 		
-		boolean [][] grid = new boolean[5][5];
-		for(int i=0; i<n_row; i++){
-			for(int j=0; j<n_column; j++){
-				grid[i][j] = false;
+	    boolean [][] grid = new boolean[5][5];
+	    for(int i=0; i<n_row; i++){
+	        for(int j=0; j<n_column; j++){
+	            grid[i][j] = false;
 			}
-		}
+	    }
 	    assertEquals(0, CountingIslands.count(n_row, n_column, grid));
 	}
 	
 	@Test
 	public static void testOneBigLand() {		
-		int n_row = 5;
-		int n_column = 5;
+	    int n_row = 5;
+	    int n_column = 5;
 		
-		boolean [][] grid = new boolean[5][5];
-		for(int i=0; i<n_row; i++){
-			for(int j=0; j<n_column; j++){
-				grid[i][j] = true;
-			}
-		}
+	    boolean [][] grid = new boolean[5][5];
+        for(int i=0; i<n_row; i++){
+        	for(int j=0; j<n_column; j++){
+        		grid[i][j] = true;
+        	}
+        }
 	    assertEquals(1, CountingIslands.count(n_row, n_column, grid));
 	}
 	
 	@Test
 	public static void testIslandsDisconnectedDiagonally() {
-		
-		int n_row = 2;
-		int n_column = 2;
-		
-		boolean [][] grid = {{false, true}, {true, false}};
-	    assertEquals(2, CountingIslands.count(n_row, n_column, grid));
+        
+        int n_row = 2;
+        int n_column = 2;
+        
+        boolean [][] grid = {{false, true}, {true, false}};
+        assertEquals(2, CountingIslands.count(n_row, n_column, grid));
 	}
 	
 	@Test
 	public static void testConnectedCount() {
-		
-		int n_row = 2;
-		int n_column = 2;
-		
-		boolean [][] grid = {{false, true}, {true, true}};
-	    assertEquals(1, CountingIslands.count(n_row, n_column, grid));
+        
+        int n_row = 2;
+        int n_column = 2;
+        
+        boolean [][] grid = {{false, true}, {true, true}};
+        assertEquals(1, CountingIslands.count(n_row, n_column, grid));
 	}
 		
 	@Test
 	public static void testConcentricRingsOfTwoIslands() {
-
-		int n_row = 7;
-		int n_column = 9;
-		
-		boolean [][]grid = 
-			  { {false, false, true,  true,  true,  true,  true,  false, false},
-			    {false, true,  true,  false, false, false, true,  true,  false}, 
-				{true,  true,  false, true,  true,  true,  false, true,  true}, 
-				{true,  false, false, true,  false, true,  false, false, true}, 
-				{true,  true,  false, true,  true,  true,  false, true,  true}, 
-				{false, true,  true,  false, false, false, true,  true,  false}, 
-				{false, false, true,  true,  true,  true,  true,  false, false} 
-			  };
-	    assertEquals(2, CountingIslands.count(n_row, n_column, grid));
+	    
+        int n_row = 7;
+        int n_column = 9;
+        
+        boolean [][]grid = 
+        	  { {false, false, true,  true,  true,  true,  true,  false, false},
+        	    {false, true,  true,  false, false, false, true,  true,  false}, 
+        		{true,  true,  false, true,  true,  true,  false, true,  true}, 
+        		{true,  false, false, true,  false, true,  false, false, true}, 
+        		{true,  true,  false, true,  true,  true,  false, true,  true}, 
+        		{false, true,  true,  false, false, false, true,  true,  false}, 
+        		{false, false, true,  true,  true,  true,  true,  false, false} 
+        	  };
+        assertEquals(2, CountingIslands.count(n_row, n_column, grid));
 	}
 
 	@Test
 	public static void testExample() {
-		
-		int n_row = 4;
-		int n_column = 4;
-		
-		boolean [][] grid = {{false, true, false, true},
-				 {true, true, false, false},
-				 {false, false, true, false},
-				 {false, false, true, false}
-				};
-		
-		assertEquals(3, CountingIslands.count(n_row, n_column, grid));
-	}
+    	
+        int n_row = 4;
+        int n_column = 4;
+        boolean [][] grid = {{false, true, false, true},
+        		 {true, true, false, false},
+        		 {false, false, true, false},
+        		 {false, false, true, false}
+        		};
+        
+        assertEquals(3, CountingIslands.count(n_row, n_column, grid));
+    }
 }
